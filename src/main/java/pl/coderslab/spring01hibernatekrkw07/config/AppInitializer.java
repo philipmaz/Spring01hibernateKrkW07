@@ -1,4 +1,4 @@
-package pl.coderslab.spring01hibernatekrkw07;
+package pl.coderslab.spring01hibernatekrkw07.config;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
