@@ -13,7 +13,6 @@ public class AuthorConverter implements Converter<String, Author> {
 
     @Override
     public Author convert(String id) {
-//        return authorDao.readById(Long.parseLong(id));
-    return null;
+        return authorDao.readById(Long.parseLong(id));
     }
 }

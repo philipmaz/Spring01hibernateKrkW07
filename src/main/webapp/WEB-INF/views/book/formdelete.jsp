@@ -34,6 +34,11 @@
         <label for="publisher">Publisher</label>
         <form:select id="publisher" path="publisher" items="${publishers}" itemLabel="name" itemValue="id"/>
     </div>
+    </div>
+    <%--    <div>--%>
+    <label for="authorList">Authors</label>
+    <form:select id="authorList" path="authorList" items="${authorList}" itemLabel="lastName" itemValue="id"/>
+    </div>
     <div>
         <input type="submit">
     </div>

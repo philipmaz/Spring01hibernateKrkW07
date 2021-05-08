@@ -45,6 +45,11 @@ public class BookDao {
         q.setParameter("minRating", minimalRating);
         return q.getResultList();
     }
+    public List<Book> readByIdWithAuthors(long id) {
+//        SELECT b FROM Book b JOIN FETCH b.authors
+        Query q = em.createQuery("SELECT e FROM Book e LEFT JOIN FETCH e.authorList WHERE e.id=:id");
+        return q.getResultList();
+    }
 
     public List<Book> readAllWithAuthors() {
 //        SELECT b FROM Book b JOIN FETCH b.authors

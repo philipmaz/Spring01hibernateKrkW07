@@ -27,6 +27,14 @@
             <form:input id="password" path="password"/>
         </div>
         <div>
+            <label for="details_id">Person Details id</label>
+            <form:input id="details_id" path="personDetails.id" type="number"/>
+        </div>
+        <div>
+            <label for="details">Person Details</label>
+            <form:select id="details" path="personDetails" items="${personDetails}" itemValue="id"/>
+        </div>
+        <div>
             <input type="submit">
         </div>
     </form:form>

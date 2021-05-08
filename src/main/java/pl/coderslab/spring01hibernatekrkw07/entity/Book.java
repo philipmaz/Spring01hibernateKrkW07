@@ -1,6 +1,11 @@
 package pl.coderslab.spring01hibernatekrkw07.entity;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +15,21 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Size(min=5)
     private String title;
+    @Range(min=1, max=10)
     private int rating;
+    @Size(min=1, max=600)
     private String description;
+    @NotNull
     @ManyToOne
     private Publisher publisher;
+    @NotNull
+    @Size(min=1)
     @ManyToMany
-    private List<Author> authorList;
+    private List<Author> authorList=new ArrayList<>();
+    @Min(1)
+    private int pages;
 
     //gettery i settery
 
@@ -24,8 +37,6 @@ public class Book {
     public List<Author> getAuthorList() {
         return authorList;
     }
-
-
 
     public Book setAuthorList(List<Author> authorList) {
         this.authorList = authorList;
@@ -74,6 +85,15 @@ public class Book {
 
     public Book setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public Book setPages(int pages) {
+        this.pages = pages;
         return this;
     }
 

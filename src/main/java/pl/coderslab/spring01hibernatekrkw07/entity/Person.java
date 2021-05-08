@@ -1,9 +1,6 @@
 package pl.coderslab.spring01hibernatekrkw07.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Person {
@@ -13,6 +10,17 @@ public class Person {
     private String login;
     private String password;
     private String email;
+    @OneToOne
+    private PersonDetails personDetails;
+
+    public PersonDetails getPersonDetails() {
+        return personDetails;
+    }
+
+    public Person setPersonDetails(PersonDetails personDetails) {
+        this.personDetails = personDetails;
+        return this;
+    }
 
     public long getId() {
         return id;
@@ -57,6 +65,7 @@ public class Person {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", personDetails=" + personDetails +
                 '}';
     }
 }

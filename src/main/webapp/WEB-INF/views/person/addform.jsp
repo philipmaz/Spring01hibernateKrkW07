@@ -25,6 +25,10 @@
             <input id="password" name="password" type="password">
         </div>
         <div>
+            <label for="details_id">Person Details id</label>
+            <input id="details_id" name="details_id" type="number">
+        </div>
+        <div>
             <input type="submit">
         </div>
     </form>

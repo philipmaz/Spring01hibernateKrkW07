@@ -16,12 +16,28 @@
     <div>
         <label for="firstName">Author First Name</label>
         <form:input id="firstName" path="firstName"/>
+        <form:errors path="firstName"/>
     </div>
     <div>
         <label for="lastName">Author Last Name</label>
         <form:input id="lastName" path="lastName"/>
+        <form:errors path="lastName"/>
     </div>
+    <div>
+        <label for="pesel">Author PESEL</label>
+        <form:input id="pesel" path="pesel"/>
+        <form:errors path="pesel"/>
+    </div>
+    <div>
+        <label for="email">Author Email</label>
+        <form:input id="email" path="email"/>
+        <form:errors path="email"/>
+    </div>
+    <div>
         <input type="submit">
+    </div>
+    <div>
+        <form:errors path="*"/>
     </div>
 </form:form>
 <div>

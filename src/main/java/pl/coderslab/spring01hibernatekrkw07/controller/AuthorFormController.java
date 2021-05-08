@@ -2,11 +2,13 @@ package pl.coderslab.spring01hibernatekrkw07.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.spring01hibernatekrkw07.dao.AuthorDao;
 import pl.coderslab.spring01hibernatekrkw07.entity.Author;
 import pl.coderslab.spring01hibernatekrkw07.entity.Book;
 
+import javax.validation.Valid;
 import java.util.stream.Collectors;
 
 @Controller
@@ -36,7 +38,10 @@ public class AuthorFormController {
     }
 
     @PostMapping("/addauthor")
-    public String addAuthorForm(@ModelAttribute Author author){
+    public String addAuthorForm(@ModelAttribute @Valid Author author, BindingResult violations){
+        if(violations.hasErrors()){
+            return "author/authorform";
+        }
         authorDao.create(author);
         return "redirect:readall";
     }
@@ -48,7 +53,10 @@ public class AuthorFormController {
     }
 
     @PostMapping("/{id}/edit")
-    public String editAuthor(@ModelAttribute Author author){
+    public String editAuthor(@ModelAttribute @Valid Author author, BindingResult violations){
+        if(violations.hasErrors()){
+            return "author/authorform";
+        }
         authorDao.update(author);
         return "redirect:../readall";
     }
@@ -60,7 +68,10 @@ public class AuthorFormController {
     }
 
     @PostMapping("/{id}/delete")
-    public String deleteAuthor(@ModelAttribute Author author){
+    public String deleteAuthor(@ModelAttribute @Valid Author author, BindingResult violations){
+        if(violations.hasErrors()){
+            return "author/authorform";
+        }
         authorDao.delete(author);
         return "redirect:../readall";
     }

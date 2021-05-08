@@ -2,6 +2,7 @@ package pl.coderslab.spring01hibernatekrkw07.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.spring01hibernatekrkw07.dao.AuthorDao;
 import pl.coderslab.spring01hibernatekrkw07.dao.BookDao;
@@ -10,6 +11,7 @@ import pl.coderslab.spring01hibernatekrkw07.entity.Author;
 import pl.coderslab.spring01hibernatekrkw07.entity.Book;
 import pl.coderslab.spring01hibernatekrkw07.entity.Publisher;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,20 +50,26 @@ public class BookFormController {
     }
 
     @PostMapping("/addform")
-    public String addForm(@ModelAttribute Book book){
+    public String addForm(@ModelAttribute @Valid Book book, BindingResult violations){
+        if(violations.hasErrors()){
+            return "book/form";
+        }
         bookDao.create(book);
         return "redirect:readall";
     }
 
     @GetMapping("/{id}/edit")
     public String editBook(@PathVariable long id, Model m){
-        m.addAttribute("book", bookDao.readById(id));
+        m.addAttribute("book", bookDao.readByIdWithAuthors(id));
 
         return "book/form";
     }
 
     @PostMapping("/{id}/edit")
-    public String editBook(@ModelAttribute Book book){
+    public String editBook(@ModelAttribute @Valid Book book, BindingResult violations){
+        if(violations.hasErrors()){
+            return "book/form";
+        }
         bookDao.update(book);
         return "redirect:../readall";
     }
@@ -69,8 +77,7 @@ public class BookFormController {
 
     @GetMapping("/{id}/delete")
     public String deleteBook(@PathVariable long id, Model m){
-        m.addAttribute("book", bookDao.readById(id));
-        m.addAttribute("id_delete", id);
+        m.addAttribute("book", bookDao.readByIdWithAuthors(id));
 
         return "book/formdelete";
     }
